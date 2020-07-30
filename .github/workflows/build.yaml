@@ -1,0 +1,16 @@
+name: build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - uses: lablabs/setup-tflint@v1
+      name: Setup TFLint
+      with:
+        tflint_version: v0.18.0
+    - shell: bash
+      run: tflint .
