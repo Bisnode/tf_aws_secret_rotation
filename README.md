@@ -1,5 +1,7 @@
 # tf_aws_secret_rotation
 
+![build](https://github.com/Bisnode/tf_aws_secret_rotation/workflows/build/badge.svg)
+
 Terraform module to configure an AWS Secrets Manager secret with custom lambda rotation
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
