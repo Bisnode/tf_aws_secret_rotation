@@ -10,7 +10,7 @@ variable "aws_region" {
 
 variable "secret_name" {
   type        = string
-  description = "Name of secret"
+  description = "Name of secret to create and use for rotation"
 }
 
 variable "secret_rotation_interval" {

@@ -25,7 +25,7 @@ Terraform module to configure an AWS Secrets Manager secret with custom lambda r
 | lambda\_function\_arn | ARN of the lambda function to use for secret rotation | `string` | n/a | yes |
 | lambda\_function\_layers | List of ARNs to (optional) layers to include in lambda context | `list(string)` | `[]` | no |
 | lambda\_function\_name | Name of the lambda function to use for secret rotation | `string` | n/a | yes |
-| secret\_name | Name of secret | `string` | n/a | yes |
+| secret\_name | Name of secret to create and use for rotation | `string` | n/a | yes |
 | secret\_rotation\_interval | Number of days between automatic secret rotation | `number` | `30` | no |
 
 ## Outputs
