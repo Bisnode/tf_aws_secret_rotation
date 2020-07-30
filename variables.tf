@@ -13,6 +13,12 @@ variable "secret_name" {
   description = "Name of secret"
 }
 
+variable "secret_rotation_interval" {
+  type        = number
+  description = "Number of days between automatic secret rotation"
+  default     = 30
+}
+
 variable "extra_secrets" {
   type        = list(string)
   description = "Optional list of ARNs for extra secrets the lambda should be able to access"
