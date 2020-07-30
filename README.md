@@ -32,6 +32,6 @@ Terraform module to configure an AWS Secrets Manager secret with custom lambda r
 
 | Name | Description |
 |------|-------------|
-| lambda\_secret | n/a |
+| lambda\_secret | The secret created by this module |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
