@@ -1,13 +1,3 @@
-variable "aws_account_id" {
-  type        = string
-  description = "AWS account ID"
-}
-
-variable "aws_region" {
-  type        = string
-  description = "AWS region"
-}
-
 variable "secret_name" {
   type        = string
   description = "Name of secret to create and use for rotation"
@@ -41,3 +31,7 @@ variable "lambda_function_layers" {
   default     = []
 }
 
+variable "lambda_iam_role_name" {
+  type        = string
+  description = "Name of IAM role to associate to lambda function"
+}

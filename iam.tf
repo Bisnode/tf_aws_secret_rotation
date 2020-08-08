@@ -1,20 +1,3 @@
-data "aws_iam_policy_document" "lambda_role" {
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      identifiers = ["lambda.amazonaws.com"]
-      type        = "Service"
-    }
-  }
-}
-
-resource "aws_iam_role" "lambda_role" {
-  name               = "${var.lambda_function_name}-role"
-  assume_role_policy = data.aws_iam_policy_document.lambda_role.json
-}
-
 # Logging
 
 data "aws_iam_policy_document" "lambda_logging" {
@@ -45,12 +28,12 @@ resource "aws_iam_policy" "lambda_logging" {
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_logging" {
-  role       = aws_iam_role.lambda_role.name
+  role       = var.lambda_iam_role_name
   policy_arn = aws_iam_policy.lambda_logging.arn
 }
 
 resource "aws_iam_role_policy_attachment" "terraform_lambda_policy" {
-  role       = aws_iam_role.lambda_role.name
+  role       = var.lambda_iam_role_name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
@@ -77,7 +60,7 @@ data "aws_iam_policy_document" "secrets_access" {
 }
 
 resource "aws_iam_role_policy_attachment" "secrets_access" {
-  role       = aws_iam_role.lambda_role.name
+  role       = var.lambda_iam_role_name
   policy_arn = aws_iam_policy.secret_access.arn
 }
 
@@ -104,6 +87,6 @@ data "aws_iam_policy_document" "network" {
 }
 
 resource "aws_iam_role_policy_attachment" "network" {
-  role       = aws_iam_role.lambda_role.name
+  role       = var.lambda_iam_role_name
   policy_arn = aws_iam_policy.network.arn
 }

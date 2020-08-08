@@ -21,12 +21,11 @@ Terraform module to configure an AWS Secrets Manager secret with custom lambda r
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| aws\_account\_id | AWS account ID | `string` | n/a | yes |
-| aws\_region | AWS region | `string` | n/a | yes |
 | extra\_secrets | Optional list of ARNs for extra secrets the lambda should be able to access | `list(string)` | `[]` | no |
 | lambda\_function\_arn | ARN of the lambda function to use for secret rotation | `string` | n/a | yes |
 | lambda\_function\_layers | List of ARNs to (optional) layers to include in lambda context | `list(string)` | `[]` | no |
 | lambda\_function\_name | Name of the lambda function to use for secret rotation | `string` | n/a | yes |
+| lambda\_iam\_role\_name | Name of IAM role to associate to lambda function | `string` | n/a | yes |
 | secret\_name | Name of secret to create and use for rotation | `string` | n/a | yes |
 | secret\_rotation\_interval | Number of days between automatic secret rotation | `number` | `30` | no |
 
@@ -34,6 +33,6 @@ Terraform module to configure an AWS Secrets Manager secret with custom lambda r
 
 | Name | Description |
 |------|-------------|
-| lambda\_secret | The secret created by this module |
+| lambda\_secret\_name | The name of the secret created by this module |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

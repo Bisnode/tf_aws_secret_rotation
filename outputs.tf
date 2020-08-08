@@ -1,4 +1,4 @@
-output "lambda_secret" {
-  value       = aws_secretsmanager_secret.lambda_secret
-  description = "The secret created by this module"
+output "lambda_secret_name" {
+  value       = aws_secretsmanager_secret.lambda_secret.name
+  description = "The name of the secret created by this module"
 }
