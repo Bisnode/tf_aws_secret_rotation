@@ -22,20 +22,21 @@ resource "aws_iam_role" "lambda_role" {
 }
 
 resource "aws_lambda_function" "secret_rotator_lambda" {
-  filename      = "lambda_function_payload.zip"
-  function_name = "lambda_function_name"
-  role          = aws_iam_role.lambda_role.name
+  filename      = data.archive_file.lambda_archive.output_path
+  function_name = "secret_rotator_lambda"
+  role          = aws_iam_role.lambda_role.arn
   handler       = "rotate.handler"
 
-  source_code_hash = data.archive_file.lambda_archive.output_base64sha256
+  source_code_hash = filebase64sha256(data.archive_file.lambda_archive.output_path)
+  runtime          = "provided"
 
-  runtime = "provided"
+  layers = []
 
-  //  environment {
-  //    variables = {
-  //      foo = "bar"
-  //    }
-  //  }
+  environment {
+    variables = {
+      foo = "bar"
+    }
+  }
 }
 
 
