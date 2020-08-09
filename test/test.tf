@@ -26,6 +26,7 @@ resource "aws_lambda_function" "secret_rotator_lambda" {
   function_name = "secret_rotator_lambda"
   role          = aws_iam_role.lambda_role.arn
   handler       = "rotate.handler"
+  timeout       = "300"
 
   source_code_hash = filebase64sha256(data.archive_file.lambda_archive.output_path)
   runtime          = "provided"

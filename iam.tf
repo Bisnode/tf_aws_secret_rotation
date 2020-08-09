@@ -20,6 +20,13 @@ data "aws_iam_policy_document" "lambda_logging" {
   }
 }
 
+resource "aws_lambda_permission" "allow_secretsmanager" {
+  statement_id  = "AllowExecutionFromSecretsManager"
+  action        = "lambda:InvokeFunction"
+  function_name = var.lambda_function_name
+  principal     = "secretsmanager.amazonaws.com"
+}
+
 resource "aws_iam_policy" "lambda_logging" {
   name        = "${var.lambda_function_name}-logs"
   path        = "/"
