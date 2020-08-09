@@ -20,6 +20,10 @@ data "aws_iam_policy_document" "lambda_logging" {
   }
 }
 
+resource "aws_cloudwatch_log_group" "lambda_log_group" {
+  name = var.lambda_function_name
+}
+
 resource "aws_lambda_permission" "allow_secretsmanager" {
   statement_id  = "AllowExecutionFromSecretsManager"
   action        = "lambda:InvokeFunction"
@@ -70,6 +74,20 @@ resource "aws_iam_role_policy_attachment" "secrets_access" {
   role       = var.lambda_iam_role_name
   policy_arn = aws_iam_policy.secret_access.arn
 }
+
+resource "aws_secretsmanager_secret" "lambda_secret" {
+  name = var.secret_name
+}
+
+resource "aws_secretsmanager_secret_rotation" "lambda_secret_rotation" {
+  secret_id           = aws_secretsmanager_secret.lambda_secret.id
+  rotation_lambda_arn = var.lambda_function_arn
+
+  rotation_rules {
+    automatically_after_days = var.secret_rotation_interval
+  }
+}
+
 
 # Network
 

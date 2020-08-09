@@ -25,12 +25,6 @@ variable "lambda_function_name" {
   description = "Name of the lambda function to use for secret rotation"
 }
 
-variable "lambda_function_layers" {
-  type        = list(string)
-  description = "List of ARNs to (optional) layers to include in lambda context"
-  default     = []
-}
-
 variable "lambda_iam_role_name" {
   type        = string
   description = "Name of IAM role to associate to lambda function"
