@@ -1,3 +1,7 @@
+locals {
+  secret_name = "secret-rotation-test-secret-${random_id.random.dec}"
+}
+
 data "archive_file" "lambda_archive" {
   type        = "zip"
   source_dir  = "${path.module}/lambda/"
@@ -25,17 +29,15 @@ resource "aws_lambda_function" "secret_rotator_lambda" {
   filename      = data.archive_file.lambda_archive.output_path
   function_name = "secret_rotator_lambda"
   role          = aws_iam_role.lambda_role.arn
-  handler       = "rotate.handler"
+  handler       = "rotate.lambda_handler"
   timeout       = "300"
 
   source_code_hash = filebase64sha256(data.archive_file.lambda_archive.output_path)
-  runtime          = "provided"
-
-  layers = []
+  runtime          = "python3.8"
 
   environment {
     variables = {
-      foo = "bar"
+      SECRET_ID = local.secret_name
     }
   }
 }
@@ -47,7 +49,7 @@ module "secret_rotator" {
   lambda_function_arn  = aws_lambda_function.secret_rotator_lambda.arn
   lambda_function_name = aws_lambda_function.secret_rotator_lambda.function_name
   lambda_iam_role_name = aws_iam_role.lambda_role.name
-  secret_name          = "secret-rotation-test-secret-${random_id.random.dec}"
+  secret_name          = local.secret_name
 }
 
 resource "random_id" "random" {
