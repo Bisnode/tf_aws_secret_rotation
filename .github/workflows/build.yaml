@@ -12,5 +12,12 @@ jobs:
       name: Setup TFLint
       with:
         tflint_version: v0.18.0
-    - shell: bash
+    - name: Run tflint
+      shell: bash
       run: tflint .
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+    - name: Terraform fmt
+      run: terraform fmt -check
+    - name: Terraform validate
+      run: terraform init
