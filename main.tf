@@ -66,7 +66,7 @@ data "aws_iam_policy_document" "secrets_access" {
       "secretsmanager:DescribeSecret",
       "secretsmanager:UpdateSecretVersionStage"
     ]
-    resources = concat(["${aws_secretsmanager_secret.lambda_secret.arn}*"], var.extra_secrets)
+    resources = concat([aws_secretsmanager_secret.lambda_secret.arn], var.extra_secrets)
   }
 }
 

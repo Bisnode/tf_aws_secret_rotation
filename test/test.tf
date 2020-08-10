@@ -34,12 +34,6 @@ resource "aws_lambda_function" "secret_rotator_lambda" {
 
   source_code_hash = filebase64sha256(data.archive_file.lambda_archive.output_path)
   runtime          = "python3.8"
-
-  environment {
-    variables = {
-      SECRET_ID = local.secret_name
-    }
-  }
 }
 
 
