@@ -2,7 +2,12 @@
 
 ![build](https://github.com/Bisnode/tf_aws_secret_rotation/workflows/build/badge.svg)
 
-Terraform module to configure an AWS Secrets Manager secret with custom lambda rotation
+Terraform module to configure an AWS Secrets Manager secret with custom lambda rotation.
+
+The module configures both the secret and rotation scheme, including all necessary roles and permissions - the actual
+lambda to use is provided as input to the module, allowing for maximum flexibility.
+
+See the `test` directory for an example implementation.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
