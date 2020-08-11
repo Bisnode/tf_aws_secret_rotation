@@ -30,6 +30,7 @@ See the `test` directory for an example implementation.
 | lambda\_function\_arn | ARN of the lambda function to use for secret rotation | `string` | n/a | yes |
 | lambda\_function\_name | Name of the lambda function to use for secret rotation | `string` | n/a | yes |
 | lambda\_iam\_role\_name | Name of IAM role to associate to lambda function | `string` | n/a | yes |
+| resource\_tags | Tags to add to resources created by this module (where applicable) | `map(string)` | `{}` | no |
 | secret\_name | Name of secret to create and use for rotation | `string` | n/a | yes |
 | secret\_rotation\_interval | Number of days between automatic secret rotation | `number` | `30` | no |
 
@@ -37,6 +38,7 @@ See the `test` directory for an example implementation.
 
 | Name | Description |
 |------|-------------|
+| lambda\_secret\_arn | The ARN of the secret created by this module |
 | lambda\_secret\_name | The name of the secret created by this module |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

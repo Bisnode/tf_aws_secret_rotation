@@ -22,6 +22,8 @@ data "aws_iam_policy_document" "lambda_logging" {
 
 resource "aws_cloudwatch_log_group" "lambda_log_group" {
   name = var.lambda_function_name
+
+  tags = var.resource_tags
 }
 
 resource "aws_lambda_permission" "allow_secretsmanager" {
@@ -77,6 +79,8 @@ resource "aws_iam_role_policy_attachment" "secrets_access" {
 
 resource "aws_secretsmanager_secret" "lambda_secret" {
   name = var.secret_name
+
+  tags = var.resource_tags
 }
 
 resource "aws_secretsmanager_secret_rotation" "lambda_secret_rotation" {
@@ -86,6 +90,8 @@ resource "aws_secretsmanager_secret_rotation" "lambda_secret_rotation" {
   rotation_rules {
     automatically_after_days = var.secret_rotation_interval
   }
+
+  tags = var.resource_tags
 }
 
 
