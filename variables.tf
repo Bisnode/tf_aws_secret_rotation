@@ -29,3 +29,9 @@ variable "lambda_iam_role_name" {
   type        = string
   description = "Name of IAM role to associate to lambda function"
 }
+
+variable "resource_tags" {
+  type        = map(string)
+  description = "Tags to add to resources created by this module (where applicable)"
+  default     = {}
+}
