@@ -93,31 +93,3 @@ resource "aws_secretsmanager_secret_rotation" "lambda_secret_rotation" {
 
   tags = var.resource_tags
 }
-
-
-# Network
-
-resource "aws_iam_policy" "network" {
-  name        = "${var.lambda_function_name}-network"
-  path        = "/"
-  description = "IAM policy for accessing network from a Lambda"
-
-  policy = data.aws_iam_policy_document.network.json
-}
-
-data "aws_iam_policy_document" "network" {
-  statement {
-    effect = "Allow"
-    actions = [
-      "ec2:CreateNetworkInterface",
-      "ec2:DescribeNetworkInterfaces",
-      "ec2:DeleteNetworkInterface"
-    ]
-    resources = ["*"]
-  }
-}
-
-resource "aws_iam_role_policy_attachment" "network" {
-  role       = var.lambda_iam_role_name
-  policy_arn = aws_iam_policy.network.arn
-}
