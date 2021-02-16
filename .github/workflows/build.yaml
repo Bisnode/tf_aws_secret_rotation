@@ -9,6 +9,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
     - uses: lablabs/setup-tflint@v1
+      # Need to enable unsecure commands due to https://github.com/lablabs/setup-tflint/issues/4
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       name: Setup TFLint
       with:
         tflint_version: v0.18.0
