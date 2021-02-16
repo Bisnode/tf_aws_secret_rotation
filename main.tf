@@ -50,6 +50,27 @@ resource "aws_iam_role_policy_attachment" "terraform_lambda_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
+# Alarms
+
+resource "aws_cloudwatch_metric_alarm" "lambda_alarm" {
+  count               = var.lambda_enable_alarms ? 1 : 0
+  alarm_name          = "${var.lambda_function_name}-errors"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  metric_name         = "Errors"
+  namespace           = "AWS/Lambda"
+  period              = "300"
+  statistic           = "Sum"
+  evaluation_periods  = "1"
+  threshold           = "1"
+  datapoints_to_alarm = "1"
+  alarm_description   = "An error running the ${var.lambda_function_name} lambda function occurred"
+  alarm_actions       = var.lambda_alarm_actions
+  treat_missing_data  = "notBreaching"
+  dimensions = {
+    FunctionName = var.lambda_function_name
+  }
+}
+
 # Secrets
 
 resource "aws_iam_policy" "secret_access" {
