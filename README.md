@@ -14,19 +14,22 @@ See the `test` directory for an example implementation.
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12 |
+| terraform | >= 0.13 |
+| aws | ~> 3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | ~> 3.0 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | extra\_secrets | Optional list of ARNs for extra secrets the lambda should be able to access | `list(string)` | `[]` | no |
+| lambda\_alarm\_actions | The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN). | `list(string)` | `[]` | no |
+| lambda\_enable\_alarms | Set to true to enable alarms on the lambda function | `bool` | `false` | no |
 | lambda\_function\_arn | ARN of the lambda function to use for secret rotation | `string` | n/a | yes |
 | lambda\_function\_name | Name of the lambda function to use for secret rotation | `string` | n/a | yes |
 | lambda\_iam\_role\_name | Name of IAM role to associate to lambda function | `string` | n/a | yes |
