@@ -14,7 +14,7 @@ See the `test` directory for an example implementation.
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.13 |
+| terraform | >= 0.14 |
 | aws | ~> 3.0 |
 
 ## Providers
